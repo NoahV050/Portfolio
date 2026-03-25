@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noah Visser — Software Developer</title>
+  <meta name="description" content="Portfolio van Noah Visser — 17-jarige Software Developer uit Groningen.">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ── PAGE LOADER ── -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <span class="loader-logo">NV<span>.</span></span>
+      <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+      <span class="loader-text" id="loaderText">Laden...</span>
+    </div>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">NV<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">Over mij</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-badge">
+      <span class="badge-dot"></span>
+      Beschikbaar voor stages/projecten
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu openen">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#about" class="mobile-link">Over mij</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Software Developer</div>
+
+      <div class="terminal-block">
+        <div class="terminal-line"><span class="prompt">$</span> whoami</div>
+        <div class="terminal-line">noah_visser — 1e jaars dev @ Alfa College</div>
+        <div class="terminal-line"><span class="prompt">$</span> location</div>
+        <div class="terminal-line">Groningen, Nederland 📍</div>
+        <div class="terminal-line"><span class="prompt">$</span> status</div>
+        <div class="terminal-line highlight">▶ bouwt dingen. leert snel. stopt niet.</div>
+      </div>
+
+      <h1 class="hero-name">
+        Noah<br>
+        <span class="line2">Visser.</span>
+      </h1>
+      <p class="hero-sub">
+        17 jaar. <strong>1e jaars Software Developer</strong> aan het Alfa College in Groningen.
+        Gepassioneerd door het bouwen van games, webapplicaties en alles daartussenin.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">Bekijk mijn werk ↓</a>
+        <a href="https://github.com/NoahV050" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+
+  <!-- ── STATS ── -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">4</span><div class="stat-label">Projecten</div></div>
+    <div class="stat"><span class="stat-num">4+</span><div class="stat-label">Talen</div></div>
+    <div class="stat"><span class="stat-num">17</span><div class="stat-label">Jaar oud</div></div>
+    <div class="stat"><span class="stat-num">1e</span><div class="stat-label">Jaars Dev</div></div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Projecten</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <article class="project-card card-highlight-purple reveal">
+        <div class="project-accent" aria-hidden="true">01</div>
+        <div class="project-num">Project 01</div>
+        <h3 class="project-title">Webshop</h3>
+        <p class="project-desc">Een volledig functionele webshop gebouwd met PHP en CSS. Inclusief productpagina's, winkelwagen en database-integratie. Laat zien dat ik server-side development begrijp en kan toepassen.</p>
+        <div class="project-tech">
+          <span class="tech-tag">PHP</span><span class="tech-tag">CSS</span><span class="tech-tag">MySQL</span><span class="tech-tag">HTML</span>
+        </div>
+        <a href="https://github.com/NoahV050/Webshop" target="_blank" rel="noopener noreferrer" class="project-link">Bekijk op GitHub →</a>
+      </article>
+      <article class="project-card card-highlight-red reveal reveal-delay-1">
+        <div class="project-accent" aria-hidden="true">02</div>
+        <div class="project-num">Project 02</div>
+        <h3 class="project-title">Mobile Game</h3>
+        <p class="project-desc">Een mobiele game ontwikkeld voor Android/iOS. Van game mechanics tot UI design — dit project laat mijn vermogen zien om interactieve ervaringen te bouwen op mobiele platformen.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Mobile</span><span class="tech-tag">Game Dev</span><span class="tech-tag">UI Design</span>
+        </div>
+        <a href="https://github.com/NoahV050/Mobile-Game" target="_blank" rel="noopener noreferrer" class="project-link">Bekijk op GitHub →</a>
+      </article>
+      <article class="project-card card-highlight-green reveal reveal-delay-2">
+        <div class="project-accent" aria-hidden="true">03</div>
+        <div class="project-num">Project 03</div>
+        <h3 class="project-title">Zuul Game</h3>
+        <p class="project-desc">Een tekst-avontuurspel gebouwd in C#. De klassieke Zuul-game als basis — uitgebreid met eigen kamers, objecten en verhaallijnen. Sterke showcase van object-georiënteerd programmeren.</p>
+        <div class="project-tech">
+          <span class="tech-tag">C#</span><span class="tech-tag">OOP</span><span class="tech-tag">Game Logic</span>
+        </div>
+        <a href="https://github.com/NoahV050/Zuul_game" target="_blank" rel="noopener noreferrer" class="project-link">Bekijk op GitHub →</a>
+      </article>
+      <article class="project-card card-highlight-blue reveal reveal-delay-3">
+        <div class="project-accent" aria-hidden="true">04</div>
+        <div class="project-num">Project 04</div>
+        <h3 class="project-title">2D Game</h3>
+        <p class="project-desc">Een 2D game met eigen sprites, physics en level design. Dit project toont mijn brede interesse in game development en mijn vaardigheid om visueel aantrekkelijke projecten te bouwen.</p>
+        <div class="project-tech">
+          <span class="tech-tag">2D Engine</span><span class="tech-tag">Game Design</span><span class="tech-tag">Physics</span>
+        </div>
+        <a href="https://github.com/NoahV050/2D-Game" target="_blank" rel="noopener noreferrer" class="project-link">Bekijk op GitHub →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section-alt">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Skills</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-layout">
+        <div class="reveal">
+          <div class="skill-group-title">// Programmeertalen</div>
+          <div class="skill-item"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
+          <div class="skill-item"><span class="skill-name">C#</span><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
+          <div class="skill-item"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill accent3" data-width="80"></div></div></div>
+          <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill accent2" data-width="55"></div></div></div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <div class="skill-group-title">// Technologieën & Tools</div>
+          <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
+          <div class="skill-item"><span class="skill-name">MySQL / Databases</span><div class="skill-bar"><div class="skill-fill accent3" data-width="65"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Game Development</span><div class="skill-bar"><div class="skill-fill accent2" data-width="68"></div></div></div>
+          <div class="skill-item"><span class="skill-name">OOP</span><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Over mij</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-layout">
+      <div class="about-visual reveal">
+        <div class="about-ring"></div>
+        <div class="about-ring"></div>
+        <div class="about-ring"></div>
+        <div class="about-center"><span>NV</span><span class="age">17 jaar</span></div>
+      </div>
+      <div class="about-text reveal reveal-delay-1">
+        <h3>Een developer in<br>wording — met drive.</h3>
+        <p>Ik ben Noah Visser, 17 jaar oud en eerstejaars Software Developer aan het Alfa College in Groningen. Wat begon als nieuwsgierigheid naar hoe apps werken, is uitgegroeid tot een echte passie.</p>
+        <p class="about-highlight">In mijn eerste jaar heb ik al 4 projecten gebouwd: van een webshop in PHP tot games in C# en mobiel. Ik leer snel, werk graag samen en wil altijd begrijpen hoe dingen <em>echt</em> werken.</p>
+        <div class="about-facts">
+          <div class="fact"><span class="fact-icon">📍</span><span class="fact-text">Woont in <strong>Groningen, Nederland</strong></span></div>
+          <div class="fact"><span class="fact-icon">🎓</span><span class="fact-text">Studeert <strong>Software Development</strong> @ Alfa College</span></div>
+          <div class="fact"><span class="fact-icon">🎮</span><span class="fact-text">Geïnteresseerd in <strong>game development & webdev</strong></span></div>
+          <div class="fact"><span class="fact-icon">🚀</span><span class="fact-text">Zoekt <strong>uitdagende stage</strong> om bij te groeien</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section-alt">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Contact</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="contact-layout">
+
+        <!-- Left: info + quick links -->
+        <div class="contact-info reveal">
+          <h2 class="contact-title">Laten we iets<br>bouwen samen.</h2>
+          <p class="contact-sub">Heb je een vraag, stage-aanbod of gewoon een leuk project? Stuur me een bericht — ik reageer snel!</p>
+
+          <div class="contact-methods">
+
+            <a href="mailto:noahvisser08@gmail.com" class="contact-method">
+              <div class="contact-method-icon email-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m2 7 10 7 10-7"/>
+                </svg>
+              </div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">E-mail</span>
+                <span class="contact-method-value">noahvisser08@gmail.com</span>
+              </div>
+              <span class="contact-method-arrow">→</span>
+            </a>
+
+            <a href="https://wa.me/31630097593?text=Hey%20Noah%2C%20ik%20zag%20je%20portfolio%20en%20wil%20graag%20contact!" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="contact-method-icon whatsapp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                </svg>
+              </div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">WhatsApp</span>
+                <span class="contact-method-value">+31 6 30097593</span>
+              </div>
+              <span class="contact-method-arrow">→</span>
+            </a>
+
+            <a href="https://github.com/NoahV050" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="contact-method-icon github-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </div>
+              <div class="contact-method-info">
+                <span class="contact-method-label">GitHub</span>
+                <span class="contact-method-value">github.com/NoahV050</span>
+              </div>
+              <span class="contact-method-arrow">→</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- Right: contact form -->
+        <div class="contact-form-wrap reveal reveal-delay-1">
+          <form class="contact-form" id="contactForm" action="https://formsubmit.co/noahvisser08@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nieuw bericht via portfolio — Noah Visser">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+
+            <div class="form-group">
+              <label for="name" class="form-label">Naam</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Jouw naam" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="jouw@email.nl" required>
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Onderwerp</label>
+              <select id="subject" name="subject" class="form-input form-select">
+                <option value="Stage aanvraag">Stage aanvraag</option>
+                <option value="Project samenwerking">Project samenwerking</option>
+                <option value="Vraag over project">Vraag over project</option>
+                <option value="Anders">Anders</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Bericht</label>
+              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Hallo Noah, ik wil graag..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit" id="submitBtn">
+              <span class="submit-text">Verstuur bericht</span>
+              <span class="submit-icon">→</span>
+            </button>
+            <div class="form-success" id="formSuccess">
+              <span>✓</span> Bericht verzonden! Ik reageer zo snel mogelijk.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2026 Noah Visser — Gemaakt in Groningen 🇳🇱</span>
+    <div class="footer-links">
+      <a href="https://github.com/NoahV050" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="#projects">Projecten</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <span class="footer-logo">NV<span>.</span></span>
+  </footer>
+
+  <!-- ── BACK TO TOP ── -->
+  <button class="back-to-top" id="backToTop" aria-label="Terug naar boven">↑</button>
+
+  <script src="main.js"></script>
+</body>
+</html>

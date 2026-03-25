@@ -348,6 +348,8 @@ section { padding: 8rem 3rem; max-width: 1200px; margin: 0 auto; }
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(124,111,255,0.08) 0%, transparent 60%);
   opacity: 0; transition: opacity 0.3s;
+  /* Zorg dat de overlay geen klikken blokkeert (zodat links op de kaart werken). */
+  pointer-events: none;
 }
 
 .project-card:hover::before { opacity: 1; }

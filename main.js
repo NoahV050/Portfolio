@@ -1,313 +1,266 @@
 /* ═══════════════════════════════════════════
-   Noah Visser — Portfolio
-   main.js
+   Noah Visser — Portfolio  |  main.js
    ═══════════════════════════════════════════ */
+
+/* ── AUTOMATISCHE LEEFTIJD ──
+   Geboortedatum: 8 oktober 2007
+   Berekent altijd de actuele leeftijd, geen handmatige updates nodig. */
+function berekenLeeftijd() {
+  const geboorteDatum = new Date(2007, 9, 8); // maanden zijn 0-indexed, 9 = oktober
+  const vandaag = new Date();
+  let leeftijd = vandaag.getFullYear() - geboorteDatum.getFullYear();
+  const maandVerschil = vandaag.getMonth() - geboorteDatum.getMonth();
+  if (maandVerschil < 0 || (maandVerschil === 0 && vandaag.getDate() < geboorteDatum.getDate())) {
+    leeftijd--;
+  }
+  return leeftijd;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ══════════════════════════════
-     1. PAGE LOADER
-  ══════════════════════════════ */
-  const loader     = document.getElementById('loader');
-  const loaderFill = document.getElementById('loaderFill');
-  const loaderText = document.getElementById('loaderText');
+  /* ── LEEFTIJD INVULLEN ── */
+  const leeftijd = berekenLeeftijd();
+  const leeftijdEls = ['heroAge', 'termAge', 'visualAge', 'aboutAge'];
+  leeftijdEls.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = id === 'termAge' ? leeftijd + ' jaar' : leeftijd;
+  });
 
-  const loadSteps = [
-    { width: '30%',  text: 'HTML laden...' },
-    { width: '60%',  text: 'Stijlen toepassen...' },
-    { width: '85%',  text: 'Scripts starten...' },
-    { width: '100%', text: 'Klaar!' },
+  // Stat teller: leeftijd heeft geen data-val, zet hem direct
+  const statAge = document.getElementById('statAge');
+  if (statAge) statAge.textContent = leeftijd;
+
+  // Footer jaar
+  const footerYear = document.getElementById('footerYear');
+  if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+  // Loader jaar
+  const loaderYear = document.getElementById('loaderYear');
+  if (loaderYear) loaderYear.textContent = new Date().getFullYear();
+
+
+  /* ── LOADER ── */
+  const loader     = document.getElementById('loader');
+  const loaderLine = document.getElementById('loaderLine');
+  const loaderStat = document.getElementById('loaderStatus');
+
+  const steps = [
+    { w: '25%',  t: 'Initialiseren' },
+    { w: '55%',  t: 'Stijlen laden' },
+    { w: '80%',  t: 'Scripts starten' },
+    { w: '100%', t: 'Klaar' },
   ];
 
-  let step = 0;
-
-  function nextStep() {
-    if (step >= loadSteps.length) {
-      setTimeout(() => loader.classList.add('hidden'), 300);
-      return;
-    }
-    loaderFill.style.width = loadSteps[step].width;
-    loaderText.textContent  = loadSteps[step].text;
-    step++;
-    setTimeout(nextStep, 300);
+  let si = 0;
+  function tick() {
+    if (si >= steps.length) { setTimeout(() => loader.classList.add('out'), 400); return; }
+    loaderLine.style.width = steps[si].w;
+    loaderStat.textContent = steps[si].t;
+    si++;
+    setTimeout(tick, 350);
   }
+  setTimeout(tick, 250);
 
-  setTimeout(nextStep, 200);
 
+  /* ── CUSTOM CURSOR ── */
+  const dot   = document.getElementById('cursorDot');
+  const trail = document.getElementById('cursorTrail');
 
-  /* ══════════════════════════════
-     2. CUSTOM CURSOR
-  ══════════════════════════════ */
-  const cursor     = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, tx = 0, ty = 0;
 
-  let mouseX = 0, mouseY = 0;
-  let ringX  = 0, ringY  = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
   });
 
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    cursorRing.style.left = ringX + 'px';
-    cursorRing.style.top  = ringY + 'px';
-    requestAnimationFrame(animateRing);
+  function animTrail() {
+    tx += (mx - tx) * .1;
+    ty += (my - ty) * .1;
+    trail.style.left = tx + 'px'; trail.style.top = ty + 'px';
+    requestAnimationFrame(animTrail);
   }
-  animateRing();
+  animTrail();
 
-  document.querySelectorAll('a, button, input, textarea, select').forEach(el => {
+  document.querySelectorAll('a, button, input, textarea, select, .proj-row, .sk-card').forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursor.style.width      = '20px';
-      cursor.style.height     = '20px';
-      cursorRing.style.width  = '60px';
-      cursorRing.style.height = '60px';
+      dot.style.width = '18px'; dot.style.height = '18px';
+      trail.style.width = '56px'; trail.style.height = '56px';
     });
     el.addEventListener('mouseleave', () => {
-      cursor.style.width      = '12px';
-      cursor.style.height     = '12px';
-      cursorRing.style.width  = '40px';
-      cursorRing.style.height = '40px';
+      dot.style.width = '8px'; dot.style.height = '8px';
+      trail.style.width = '36px'; trail.style.height = '36px';
     });
   });
 
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity     = '0';
-    cursorRing.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity     = '1';
-    cursorRing.style.opacity = '1';
-  });
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; trail.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; trail.style.opacity = '1'; });
 
 
-  /* ══════════════════════════════
-     3. NAVBAR — SCROLL + ACTIVE
-  ══════════════════════════════ */
-  const navbar = document.getElementById('navbar');
-
+  /* ── NAVBAR SCROLL ── */
+  const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    nav.classList.toggle('scrolled', scrollY > 40);
   }, { passive: true });
 
-  // Highlight active section in nav
-  const sections   = document.querySelectorAll('section[id], div[id]');
-  const navAnchors = document.querySelectorAll('.nav-links a');
+  // Active nav link
+  const secEls   = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navAnchors.forEach(a => {
+  const secObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => {
           a.classList.toggle('active', a.getAttribute('href') === '#' + id);
         });
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
 
-  sections.forEach(s => sectionObserver.observe(s));
+  secEls.forEach(s => secObs.observe(s));
 
 
-  /* ══════════════════════════════
-     4. SCROLL REVEAL
-  ══════════════════════════════ */
-  const revealEls = document.querySelectorAll('.reveal');
+  /* ── HAMBURGER ── */
+  const burger  = document.getElementById('burger');
+  const mobMenu = document.getElementById('mobMenu');
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
+  burger.addEventListener('click', () => {
+    const open = mobMenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+  });
+
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+    mobMenu.classList.remove('open'); burger.classList.remove('open');
+  }));
+
+  document.addEventListener('click', e => {
+    if (!nav.contains(e.target) && !mobMenu.contains(e.target)) {
+      mobMenu.classList.remove('open'); burger.classList.remove('open');
+    }
+  });
+
+
+  /* ── SMOOTH SCROLL ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); return; }
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const offset = nav.offsetHeight + 20;
+      scrollTo({ top: target.getBoundingClientRect().top + scrollY - offset, behavior: 'smooth' });
     });
-  }, { threshold: 0.12 });
-
-  revealEls.forEach(el => revealObserver.observe(el));
+  });
 
 
-  /* ══════════════════════════════
-     5. SKILL BAR ANIMATION
-  ══════════════════════════════ */
-  document.querySelectorAll('.skill-fill').forEach(bar => { bar.style.width = '0'; });
+  /* ── SCROLL REVEAL ── */
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
 
-  const skillSection = document.querySelector('#skills');
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.skill-fill').forEach(bar => {
-          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+
+  /* ── SKILL BAR ANIMATIE ── */
+  document.querySelectorAll('.skc-fill').forEach(b => b.style.width = '0');
+
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.skc-fill').forEach(b => {
+          setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 150);
         });
-        skillObserver.unobserve(entry.target);
+        skillObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.3 });
 
-  if (skillSection) skillObserver.observe(skillSection);
+  const skillSec = document.getElementById('skills');
+  if (skillSec) skillObs.observe(skillSec);
 
 
-  /* ══════════════════════════════
-     6. MOBILE HAMBURGER MENU
-  ══════════════════════════════ */
-  const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
+  /* ── HERO COUNTER ANIMATIE ── */
+  const statEls   = document.querySelectorAll('.h-stat-n[data-val]');
+  const heroStats = document.querySelector('.hero-stats-row');
+  let statsAnimated = false;
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-label', isOpen ? 'Menu sluiten' : 'Menu openen');
-  });
-
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-label', 'Menu openen');
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
-      mobileMenu.classList.remove('open');
-      hamburger.classList.remove('open');
-    }
-  });
-
-
-  /* ══════════════════════════════
-     7. SMOOTH SCROLL
-  ══════════════════════════════ */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (href === '#') {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      const navHeight = navbar.offsetHeight;
-      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
-
-
-  /* ══════════════════════════════
-     8. STATS COUNTER ANIMATION
-  ══════════════════════════════ */
-  const statsBar = document.querySelector('.stats-bar');
-
-  function animateCounter(el, numStr, suffix) {
-    const num = parseInt(numStr);
-    if (isNaN(num)) { el.textContent = numStr + suffix; return; }
-    const dur   = 1200;
-    const start = performance.now();
-    function step(now) {
-      const p = Math.min((now - start) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(e * num) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.stat-num').forEach(el => {
-          const raw = el.textContent.trim();
-          const num = raw.replace(/[^0-9]/g, '');
-          const suf = raw.replace(/[0-9]/g, '');
-          animateCounter(el, num, suf);
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !statsAnimated) {
+        statsAnimated = true;
+        statEls.forEach(el => {
+          const target = parseInt(el.dataset.val);
+          const dur = 1200;
+          const start = performance.now();
+          function step(now) {
+            const p = Math.min((now - start) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(ease * target);
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
         });
-        statsObserver.unobserve(entry.target);
+        statsObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.5 });
 
-  if (statsBar) statsObserver.observe(statsBar);
+  if (heroStats) statsObs.observe(heroStats);
 
 
-  /* ══════════════════════════════
-     9. PROJECT CARD TILT
-  ══════════════════════════════ */
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const dx   = (e.clientX - rect.left - rect.width  / 2) / (rect.width  / 2);
-      const dy   = (e.clientY - rect.top  - rect.height / 2) / (rect.height / 2);
-      card.style.transform  = `perspective(800px) rotateY(${dx * 3}deg) rotateX(${-dy * 3}deg)`;
-      card.style.transition = 'transform 0.1s ease';
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform  = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
-      card.style.transition = 'transform 0.5s ease';
+  /* ── PROJECT ROW GLOW ── */
+  document.querySelectorAll('.proj-row').forEach(row => {
+    row.addEventListener('mousemove', e => {
+      const rect = row.getBoundingClientRect();
+      const color = row.dataset.color || 'rgba(167,139,250,.06)';
+      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+      row.querySelector('.proj-hover-bg').style.background =
+        `radial-gradient(circle at ${x}% ${y}%, ${color}22 0%, transparent 60%)`;
     });
   });
 
 
-  /* ══════════════════════════════
-     10. BACK TO TOP BUTTON
-  ══════════════════════════════ */
-  const backBtn = document.getElementById('backToTop');
-
-  window.addEventListener('scroll', () => {
-    backBtn.classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
-
-  backBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-
-  /* ══════════════════════════════
-     11. CONTACT FORM FEEDBACK
-  ══════════════════════════════ */
-  const form       = document.getElementById('contactForm');
-  const submitBtn  = document.getElementById('submitBtn');
-  const successMsg = document.getElementById('formSuccess');
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      // Show loading state on button
-      submitBtn.disabled = true;
-      submitBtn.querySelector('.submit-text').textContent = 'Wordt verzonden...';
-      submitBtn.querySelector('.submit-icon').textContent = '⏳';
-
-      // FormSubmit.co handles real submission via the action attribute.
-      // After ~2s we optimistically show the success message in case
-      // the user gets redirected back or the form completes.
-      setTimeout(() => {
-        successMsg.classList.add('show');
-        submitBtn.querySelector('.submit-text').textContent = 'Verstuurd!';
-        submitBtn.querySelector('.submit-icon').textContent = '✓';
-      }, 2000);
+  /* ── HERO CARD TILT ── */
+  const frontCard = document.querySelector('.h-card--front');
+  if (frontCard && window.innerWidth > 900) {
+    frontCard.addEventListener('mousemove', e => {
+      const r = frontCard.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+      const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+      frontCard.style.transform = `perspective(900px) rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg) translateZ(8px)`;
+    });
+    frontCard.addEventListener('mouseleave', () => {
+      frontCard.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0px)';
     });
   }
 
 
-  /* ══════════════════════════════
-     12. TYPING EFFECT — terminal
-  ══════════════════════════════ */
-  const terminalLines = document.querySelectorAll('.terminal-line');
+  /* ── BACK TO TOP ── */
+  const btt = document.getElementById('btt');
+  window.addEventListener('scroll', () => btt.classList.toggle('vis', scrollY > 400), { passive: true });
+  btt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
-  terminalLines.forEach((line, i) => {
-    const original = line.innerHTML;
-    line.innerHTML  = '';
-    line.style.opacity = '0';
 
-    setTimeout(() => {
-      line.style.opacity = '1';
-      line.innerHTML = original;
-    }, 1400 + i * 200); // starts after loader
-  });
+  /* ── CONTACT FORM ── */
+  const form        = document.getElementById('contactForm');
+  const submitBtn   = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+
+  if (form) {
+    form.addEventListener('submit', () => {
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.cf-submit-text').textContent = 'Verzenden...';
+      submitBtn.querySelector('.cf-submit-icon').textContent = '⏳';
+      setTimeout(() => {
+        formSuccess.classList.add('show');
+        submitBtn.querySelector('.cf-submit-text').textContent = 'Verstuurd!';
+        submitBtn.querySelector('.cf-submit-icon').textContent = '✓';
+      }, 2000);
+    });
+  }
 
 });

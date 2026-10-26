@@ -3,10 +3,10 @@
    ═══════════════════════════════════════════ */
 
 /* ── AUTOMATISCHE LEEFTIJD ──
-   Geboortedatum: 8 oktober 2007
+   Geboortedatum: 5 oktober 2008
    Berekent altijd de actuele leeftijd, geen handmatige updates nodig. */
 function berekenLeeftijd() {
-  const geboorteDatum = new Date(2007, 9, 8); // maanden zijn 0-indexed, 9 = oktober
+  const geboorteDatum = new Date(2008, 9, 5); // maanden zijn 0-indexed, 9 = oktober
   const vandaag = new Date();
   let leeftijd = vandaag.getFullYear() - geboorteDatum.getFullYear();
   const maandVerschil = vandaag.getMonth() - geboorteDatum.getMonth();
